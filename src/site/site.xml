@@ -11,7 +11,7 @@
   </skin>
   
   <body>
-    <menu name="Git Hub API for Java">
+    <menu name="${project.name}">
       <item name="Introduction"                   href="/index.html"/>
       <item name="Download"               href="http://mvnrepository.com/artifact/${project.groupId}/${project.artifactId}"/>
       <item name="Source code" href="https://github.com/kohsuke/${project.artifactId}"/>
