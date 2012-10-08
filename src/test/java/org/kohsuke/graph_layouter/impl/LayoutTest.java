@@ -13,13 +13,40 @@ import java.io.InputStreamReader;
 public class LayoutTest extends GraphTestBase {
     public void testUnixFamilyTree() throws Exception {
         Graph<String> g = parseDot("unixFamilyTree.dot");
+        g.draw(layout(g),new File("unixFamilyTree.png"));
+    }
+
+    public void testGraphVizPluginForConfluence() throws Exception {
+        Graph<String> g = parseDot("graphVizPluginForConfluence.dot");
+        g.draw(layout(g),new File("graphVizPluginForConfluence.png"));
+    }
+
+    public void testTraceRoute() throws Exception {
+        Graph<String> g = parseDot("traceroute.dot");
+        g.draw(layout(g),new File("traceroute.png"));
+    }
+
+    // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
+    public void testAllaFieraDellEst() throws Exception {
+        Graph<String> g = parseDot("alla_fiera_dell_est.dot");
+        g.draw(layout(g),new File("alla_fiera_dell_est.png"));
+    }
+
+    // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
+    public void testAqueousTransmission() throws Exception {
+        Graph<String> g = parseDot("alla_fiera_dell_est.dot");
+        g.draw(layout(g),new File("alla_fiera_dell_est.png"));
+    }
+
+
+    private Layout<Vertex<String>> layout(Graph<String> g) {
         Layout<Vertex<String>> layout = new Layout<Vertex<String>>(g.makeNavigator(), Direction.TOPDOWN);
         for (Vertex<String> v : g) {
             v.pos.setLocation(
                     layout.vertex(v).getCenterX(),
                     layout.vertex(v).getCenterY());
         }
-        g.draw(new File("test.png"));
+        return layout;
     }
 
     /**

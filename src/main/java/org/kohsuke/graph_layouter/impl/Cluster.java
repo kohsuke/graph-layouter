@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 class Cluster {
     /**
-     * This field holds the amont of level adjustments for vertices in thsi cluster.
+     * This field holds the amount of level adjustments for vertices in thsi cluster.
      */
     int dropHeight = Integer.MAX_VALUE;
 

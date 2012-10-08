@@ -77,6 +77,31 @@ public class HierarchyBuilder {
             v.level = level;
         }
 
+        // break cycles by reversing edges
+        for (Vertex<T> v : topoOrder) {
+            for (Vertex<T> w : new ArrayList<Vertex<T>>(dir.getEdges(v))) {// make a copy because we might change this
+                switch (dir) {
+                case FORWARD:
+                    if (v.level>w.level) {
+                        v.forward.remove(w);
+                        w.backward.remove(v);
+                        v.backward.add(w);
+                        w.forward.add(v);
+                    }
+                    break;
+                case BACKWARD:
+                    if (v.level<w.level) {
+                        w.forward.remove(v);
+                        v.backward.remove(w);
+                        w.backward.add(v);
+                        v.forward.add(w);
+                    }
+                    break;
+                }
+            }
+        }
+
+
         return topoOrder;
     }
 

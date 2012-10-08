@@ -103,7 +103,7 @@ public class Layout<T> {
         Vertex<T> b = graph.get(w);
         if(b==null) return null;
 
-        if(a.forward.contains(b)) {
+        if(a.forward.contains(b) || b.forward.contains(a)) {
             // direct edge
             return Collections.emptyList();
         } else {
@@ -119,6 +119,20 @@ public class Layout<T> {
                     return points;
                 }
             }
+
+            for (Vertex<T> c : a.backward) {
+                assert c.sink==a;
+                if(c.source==b) {
+                    // this is the path. follow it.
+                    List<Point> points = new ArrayList<Point>();
+                    do {
+                        points.add(rotate(c.pos));
+                        c = c.backward.iterator().next();
+                    } while(c.isDummy());
+                    return points;
+                }
+            }
+
             // no such edge
             return null;
         }
