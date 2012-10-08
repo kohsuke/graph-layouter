@@ -5,8 +5,21 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Decomposes DAG to hierarchical graph, where verticies are assigned "level"s,
- * so that edges only flow from lower levels to higher levels. 
+ * Decomposes DAG to hierarchical graph, where vertices are assigned levels,
+ * such that edges only flow from lower levels to higher levels.
+ *
+ * Levels assigned will be set to {@link Vertex#level}.
+ *
+ * <h3>Example</h3>
+ * <pre>
+ * B C A   <-- level 0
+ * |/ /
+ * D E F   <-- level 1
+ * |/|\|
+ * G I H   <-- level 2
+ * |  /|
+ * L K J   <-- level 3
+ * </pre>
  *
  * @author Kohsuke Kawaguchi
  */

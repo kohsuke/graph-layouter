@@ -16,7 +16,11 @@ import java.util.logging.*;
 
 /**
  * Assigns order among vertices in the same level.
- * 
+ *
+ * <p>
+ * In a top-to-bottom graph, this amounts to looking at nodes adjacent to each other
+ * and swap them to reduce the number of edge crossing.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class OrderAssigner {
