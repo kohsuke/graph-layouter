@@ -109,7 +109,7 @@ public class OrderAssignerTest extends GraphTestBase {
         );
 
         new Coordinator().layout(lm);
-        graph.draw(new File("test.png"));
+        graph.draw(null,new File("test.png"));
         System.out.println(lm);
     }
 

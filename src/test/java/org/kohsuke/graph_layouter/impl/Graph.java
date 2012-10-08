@@ -1,21 +1,17 @@
 package org.kohsuke.graph_layouter.impl;
 
+import org.kohsuke.graph_layouter.Layout;
 import org.kohsuke.graph_layouter.Navigator;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -48,7 +44,7 @@ public class Graph<T> extends HashSet<Vertex<T>> {
         return area;
     }
 
-    public void draw(File file) throws IOException {
+    public void draw(/*optional*/ Layout<Vertex<T>> layout, File file) throws IOException {
         Rectangle area = calcDrawingArea();
         BufferedImage image = new BufferedImage(area.width, area.height, BufferedImage.TYPE_INT_RGB );
         Graphics2D g2 = image.createGraphics();
@@ -59,8 +55,17 @@ public class Graph<T> extends HashSet<Vertex<T>> {
         g2.setPaint(Color.BLACK);
         for (Vertex<T> v : this) {
             g2.fill(v.boundBox());
-            for (Vertex<T> w : v.forward)
-                g2.drawLine(v.pos. x,v.pos.y, w.pos.x, w.pos.y);
+            for (Vertex<T> w : v.forward) {
+                Point p = v.pos;
+                if (layout!=null) {
+                    for (Point waypoint : layout.edge(v, w)) {
+                        g2.drawLine(p.x,p.y, waypoint.x, waypoint.y);
+                        p = waypoint;
+                    }
+                }
+
+                g2.drawLine(p.x,p.y, w.pos.x, w.pos.y);
+            }
         }
 
         g2.dispose();

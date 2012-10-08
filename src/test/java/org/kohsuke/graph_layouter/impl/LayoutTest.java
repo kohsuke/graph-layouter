@@ -34,10 +34,9 @@ public class LayoutTest extends GraphTestBase {
 
     // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
     public void testAqueousTransmission() throws Exception {
-        Graph<String> g = parseDot("alla_fiera_dell_est.dot");
-        g.draw(layout(g),new File("alla_fiera_dell_est.png"));
+        Graph<String> g = parseDot("aqueousTransmission.dot");
+        g.draw(layout(g),new File("aqueousTransmission.png"));
     }
-
 
     private Layout<Vertex<String>> layout(Graph<String> g) {
         Layout<Vertex<String>> layout = new Layout<Vertex<String>>(g.makeNavigator(), Direction.TOPDOWN);
