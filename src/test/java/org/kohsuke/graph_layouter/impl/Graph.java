@@ -1,5 +1,7 @@
 package org.kohsuke.graph_layouter.impl;
 
+import org.kohsuke.graph_layouter.Navigator;
+
 import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,15 +12,24 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public class Graph<T> extends HashSet<Vertex<T>> {
+    private final Map<T,Vertex<T>> vertices = new HashMap<T, Vertex<T>>();
+
     Vertex makeVertex(T tag) {
-        Vertex<T> v = new Vertex<T>(tag,new Dimension(10,10));
-        add(v);
+        Vertex<T> v = vertices.get(tag);
+        if (v==null) {
+            v = new Vertex<T>(tag,new Dimension(10,10));
+            vertices.put(tag,v);
+            add(v);
+        }
         return v;
     }
 
@@ -60,5 +71,21 @@ public class Graph<T> extends HashSet<Vertex<T>> {
         } finally {
             fos.close();
         }
+    }
+
+    public Navigator<Vertex<T>> makeNavigator() {
+        return new Navigator<Vertex<T>>() {
+            public Collection<Vertex<T>> vertices() {
+                return Graph.this;
+            }
+
+            public Collection<Vertex<T>> edge(Vertex<T> t) {
+                return t.forward;
+            }
+
+            public Dimension getSize(Vertex<T> t) {
+                return t.size;
+            }
+        };
     }
 }
