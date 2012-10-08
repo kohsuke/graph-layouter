@@ -103,7 +103,7 @@ public class OrderAssigner {
     }
 
     /**
-     * Reorders verticies of levels by using {@link #orderingHeuristic}.
+     * Reorders vertices of levels by using {@link #orderingHeuristic}.
      */
     private <T> void reorder(LevelDirection dir, LevelMap<T> lm, boolean flipEqual) {
         for(org.kohsuke.graph_layouter.impl.Level<T> lv=dir.first(lm); dir.next(lv)!=null; lv=dir.next(lv)) {

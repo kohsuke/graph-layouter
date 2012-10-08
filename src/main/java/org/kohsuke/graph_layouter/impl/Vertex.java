@@ -100,7 +100,10 @@ public final class Vertex<T> {
     }
 
     public String toString() {
-        return tag.toString();
+        if (isDummy())
+            return "waypoint["+source.tag+"->"+sink.tag+']';
+        else
+            return tag.toString();
     }
 
     /**

@@ -108,7 +108,7 @@ public final class Level<T> {
 
     /**
      * Gets the number of crossings between this level and its two adjacent levels,
-     * when two verticies v and w on this level are swapped.
+     * when two vertices v and w on this level are swapped.
      */
     public int getAdjacentSwapCrossing(Vertex<T> v, Vertex<T> w) {
         return Level.countSwapCrossing(prev, this, v,w, EdgeDirection.FORWARD)
