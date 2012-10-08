@@ -41,7 +41,7 @@ public class Coordinator {
             LOGGER.fine("Graph=\n"+lm);
         }
 
-        // at least run a cerain number of times
+        // at least run a certain number of times
         LevelDirection dir = LevelDirection.DOWN;
         for( int i=0; i<MAX_ITERATION; i++,dir=dir.opposite() ) {
             move(dir, lm);
@@ -335,7 +335,7 @@ public class Coordinator {
         };
     }
 
-    private static final int MAX_ITERATION = 8;
+    private static final int MAX_ITERATION = 17;
     private static final int NO_BARYCENTER = Integer.MIN_VALUE;
 
     private static final Logger LOGGER = Logger.getLogger(Coordinator.class.getName());

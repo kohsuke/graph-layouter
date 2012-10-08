@@ -41,6 +41,7 @@ public class Graph<T> extends HashSet<Vertex<T>> {
         }
 
         if(area==null)  area = new Rectangle();
+        area.grow(MARGIN,MARGIN);
         return area;
     }
 
@@ -93,4 +94,6 @@ public class Graph<T> extends HashSet<Vertex<T>> {
             }
         };
     }
+
+    private static final int MARGIN = 25;
 }

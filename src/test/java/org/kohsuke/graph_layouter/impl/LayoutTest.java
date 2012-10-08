@@ -38,6 +38,12 @@ public class LayoutTest extends GraphTestBase {
         g.draw(layout(g),new File("aqueousTransmission.png"));
     }
 
+        // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
+    public void testBalloInFaDiesisMinore() throws Exception {
+        Graph<String> g = parseDot("Ballo in Fa diesis minore.dot");
+        g.draw(layout(g),new File("Ballo in Fa diesis minore.png"));
+    }
+
     private Layout<Vertex<String>> layout(Graph<String> g) {
         Layout<Vertex<String>> layout = new Layout<Vertex<String>>(g.makeNavigator(), Direction.TOPDOWN);
         for (Vertex<String> v : g) {
