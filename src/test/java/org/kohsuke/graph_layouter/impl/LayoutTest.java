@@ -41,7 +41,7 @@ public class LayoutTest extends GraphTestBase {
         // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
     public void testBalloInFaDiesisMinore() throws Exception {
         Graph<String> g = parseDot("Ballo in Fa diesis minore.dot");
-        g.draw(layout(g),new File("Ballo in Fa diesis minore.png"));
+        g.html(layout(g),new File("Ballo in Fa diesis minore.html"));
     }
 
     private Layout<Vertex<String>> layout(Graph<String> g) {

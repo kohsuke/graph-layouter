@@ -1,5 +1,6 @@
 package org.kohsuke.graph_layouter.impl;
 
+import org.apache.commons.io.IOUtils;
 import org.kohsuke.graph_layouter.Layout;
 import org.kohsuke.graph_layouter.Navigator;
 
@@ -10,8 +11,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.*;
-import java.util.List;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -43,6 +48,28 @@ public class Graph<T> extends LinkedHashSet<Vertex<T>> {
         if(area==null)  area = new Rectangle();
         area.grow(MARGIN,MARGIN);
         return area;
+    }
+
+    public void html(/*optional*/ Layout<Vertex<T>> layout, File file) throws IOException {
+        PrintWriter html = new PrintWriter(file);
+        html.printf("<html><head><style>");
+        IOUtils.copy(new InputStreamReader(getClass().getResourceAsStream("style.css")),html);
+        html.printf("</style><script>");
+        IOUtils.copy(new InputStreamReader(getClass().getResourceAsStream("style.js")),html);
+        html.printf("</script></head><body>");
+        draw(layout,new File(file.getPath()+".png"));
+
+        Rectangle bound = calcDrawingArea();
+
+        html.printf("<div position='relative'>");
+        html.printf("<img src='%s.png'/>", file.getName());
+        for (Vertex<T> v : this) {
+            Rectangle box = v.boundBox();
+            html.printf("<div class='node' style='left:%d; top:%d; width:%d; height:%d' tag='%s'></div>",
+                    box.x - bound.x, box.y - bound.y, box.width, box.height, v.tag);
+        }
+        html.print("</div><div id=name></div></body></html>");
+        html.close();
     }
 
     public void draw(/*optional*/ Layout<Vertex<T>> layout, File file) throws IOException {
