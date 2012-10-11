@@ -13,29 +13,29 @@ import java.io.InputStreamReader;
 public class LayoutTest extends GraphTestBase {
     public void testUnixFamilyTree() throws Exception {
         Graph<String> g = parseDot("unixFamilyTree.dot");
-        g.draw(layout(g),new File("unixFamilyTree.png"));
+        g.html(layout(g),new File("unixFamilyTree.html"));
     }
 
     public void testGraphVizPluginForConfluence() throws Exception {
         Graph<String> g = parseDot("graphVizPluginForConfluence.dot");
-        g.draw(layout(g),new File("graphVizPluginForConfluence.png"));
+        g.html(layout(g),new File("graphVizPluginForConfluence.html"));
     }
 
     public void testTraceRoute() throws Exception {
         Graph<String> g = parseDot("traceroute.dot");
-        g.draw(layout(g),new File("traceroute.png"));
+        g.html(layout(g),new File("traceroute.html"));
     }
 
     // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
     public void testAllaFieraDellEst() throws Exception {
         Graph<String> g = parseDot("alla_fiera_dell_est.dot");
-        g.draw(layout(g),new File("alla_fiera_dell_est.png"));
+        g.html(layout(g),new File("alla_fiera_dell_est.html"));
     }
 
     // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
     public void testAqueousTransmission() throws Exception {
         Graph<String> g = parseDot("aqueousTransmission.dot");
-        g.draw(layout(g),new File("aqueousTransmission.png"));
+        g.html(layout(g),new File("aqueousTransmission.html"));
     }
 
         // from http://www.fantascienza.net/leonardo/so/lyrics_graph/lyrics_graph.html
