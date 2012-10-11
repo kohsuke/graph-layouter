@@ -80,7 +80,7 @@ public class Coordinator {
     }
 
     /**
-     * Moves the vertices in the 'next' level by considering the verticies in the 'fixed' level.
+     * Moves the vertices in the 'next' level by considering the vertices in the 'fixed' level.
      */
     private <T> void move(Level<T> fixed, Level<T> next, LevelDirection dir) {
         StringBuilder buf = new StringBuilder();    // log message
