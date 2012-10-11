@@ -31,6 +31,10 @@ public final class Level<T> {
         return next;
     }
 
+    public Level<T> forward(EdgeDirection dir) {
+        return dir==EdgeDirection.FORWARD ? next() : prev();
+    }
+
     public Level<T> makeNext() {
         if(next==null) {
             next = new Level<T>(n+1);
@@ -207,6 +211,10 @@ public final class Level<T> {
         // v.level==n => verticies.get(v.order)==v
         assert v.level!=n || vertices.get(v.order)==v;
         return v.level==n;
+    }
+
+    public int indexOf(Vertex<T> v) {
+        return vertices.indexOf(v);
     }
 
     /**

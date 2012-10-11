@@ -6,6 +6,7 @@ import org.kohsuke.graph_layouter.impl.HierarchyBuilder;
 import org.kohsuke.graph_layouter.impl.LevelMap;
 import org.kohsuke.graph_layouter.impl.OrderAssigner;
 import org.kohsuke.graph_layouter.impl.ProperTransformer;
+import org.kohsuke.graph_layouter.impl.StraightenLongEdge;
 import org.kohsuke.graph_layouter.impl.Vertex;
 
 import java.awt.Point;
@@ -54,6 +55,7 @@ public class Layout<T> {
         new ProperTransformer().makeProper(g);
         LevelMap<T> lm = new OrderAssigner().layout(g);
         new Coordinator().layout(lm);
+        new StraightenLongEdge<T>().layout(lm);
     }
 
     /**

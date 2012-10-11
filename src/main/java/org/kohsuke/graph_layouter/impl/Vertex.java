@@ -58,7 +58,7 @@ public final class Vertex<T> {
     public final Dimension size;
 
     /**
-     * Position of the cetner of this vertex in the drawing.
+     * Position of the center of this vertex in the drawing.
      * This is the ultimate objective of the whole computation.
      */
     public final Point pos = new Point();
@@ -109,6 +109,10 @@ public final class Vertex<T> {
      */
     public Point topLeft() {
         return new Point(pos.x-size.width/2, pos.y-size.height/2);
+    }
+
+    public Point bottomRight() {
+        return new Point(pos.x+size.width/2, pos.y+size.height/2);
     }
 
     /**

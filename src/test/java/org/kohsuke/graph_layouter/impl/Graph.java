@@ -46,23 +46,24 @@ public class Graph<T> extends LinkedHashSet<Vertex<T>> {
         }
 
         if(area==null)  area = new Rectangle();
-        area.grow(MARGIN,MARGIN);
+        area.grow(MARGIN*2,MARGIN*2);
         return area;
     }
 
     public void html(/*optional*/ Layout<Vertex<T>> layout, File file) throws IOException {
         PrintWriter html = new PrintWriter(file);
         html.printf("<html><head><style>");
-        IOUtils.copy(new InputStreamReader(getClass().getResourceAsStream("style.css")),html);
+        IOUtils.copy(new InputStreamReader(getClass().getResourceAsStream("style.css")), html);
         html.printf("</style><script>");
-        IOUtils.copy(new InputStreamReader(getClass().getResourceAsStream("style.js")),html);
+        IOUtils.copy(new InputStreamReader(getClass().getResourceAsStream("style.js")), html);
         html.printf("</script></head><body>");
-        draw(layout,new File(file.getPath()+".png"));
+        String png = swapExtension(file.getPath(), ".png");
+        draw(layout,new File(png));
 
         Rectangle bound = calcDrawingArea();
 
         html.printf("<div position='relative'>");
-        html.printf("<img src='%s.png'/>", file.getName());
+        html.printf("<img src='%s'/>", png);
         for (Vertex<T> v : this) {
             Rectangle box = v.boundBox();
             html.printf("<div class='node' style='left:%d; top:%d; width:%d; height:%d' tag='%s'></div>",
@@ -70,6 +71,12 @@ public class Graph<T> extends LinkedHashSet<Vertex<T>> {
         }
         html.print("</div><div id=name></div></body></html>");
         html.close();
+    }
+
+    private String swapExtension(String path, String ext) {
+        int i = path.lastIndexOf('.');
+        if (i>=0)   path=path.substring(0,i);
+        return path+ext;
     }
 
     public void draw(/*optional*/ Layout<Vertex<T>> layout, File file) throws IOException {
