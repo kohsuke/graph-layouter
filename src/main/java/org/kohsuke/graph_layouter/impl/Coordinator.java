@@ -127,7 +127,7 @@ public class Coordinator {
     }
 
     /**
-     * Shifts verticies to right by the given width.
+     * Shifts vertices to right by the given width.
      *
      * <p>
      * The way to visualize this is that you have:

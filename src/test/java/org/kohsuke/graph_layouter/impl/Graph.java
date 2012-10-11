@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author Kohsuke Kawaguchi
  */
-public class Graph<T> extends HashSet<Vertex<T>> {
+public class Graph<T> extends LinkedHashSet<Vertex<T>> {
     private final Map<T,Vertex<T>> vertices = new HashMap<T, Vertex<T>>();
 
     Vertex makeVertex(T tag) {

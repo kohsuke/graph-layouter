@@ -1,19 +1,17 @@
 package org.kohsuke.graph_layouter.impl;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author Kohsuke Kawaguchi
  */
 public final class Vertex<T> {
-    public final Set<Vertex<T>> forward = new HashSet<Vertex<T>>();
-    public final Set<Vertex<T>> backward = new HashSet<Vertex<T>>();
+    public final Set<Vertex<T>> forward = new LinkedHashSet<Vertex<T>>();
+    public final Set<Vertex<T>> backward = new LinkedHashSet<Vertex<T>>();
 
     /**
      * Used by {@link Dfs} to mark vertices that are already visited.
